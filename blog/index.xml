@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blogs on 我的博客</title>
+    <link>https://yichixing.github.io/hugo_blog_note/blog/</link>
+    <description>Recent content in Blogs on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 20 Apr 2025 11:45:26 +0800</lastBuildDate>
+    <atom:link href="https://yichixing.github.io/hugo_blog_note/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My New Post</title>
+      <link>https://yichixing.github.io/hugo_blog_note/blog/my-new-post/</link>
+      <pubDate>Sun, 20 Apr 2025 11:45:26 +0800</pubDate>
+      <guid>https://yichixing.github.io/hugo_blog_note/blog/my-new-post/</guid>
+      <description>&lt;p&gt;This is a page about »My New Post«.&lt;/p&gt;&#xA;&lt;h2 id=&#34;欢迎来到我的博客&#34;&gt;欢迎来到我的博客&lt;/h2&gt;&#xA;&lt;p&gt;这是我的第一篇博客文章。在这里，我将分享一些有趣的内容。&lt;/p&gt;&#xA;&lt;h3 id=&#34;关于我&#34;&gt;关于我&lt;/h3&gt;&#xA;&lt;p&gt;我是一名Hugo博客爱好者，喜欢探索新技术和分享知识。&lt;/p&gt;&#xA;&lt;h3 id=&#34;markdown语法展示&#34;&gt;Markdown语法展示&lt;/h3&gt;&#xA;&lt;p&gt;这是&lt;strong&gt;粗体&lt;/strong&gt;文本，这是&lt;em&gt;斜体&lt;/em&gt;文本。&lt;/p&gt;&#xA;&lt;p&gt;这是一个无序列表：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;项目1&lt;/li&gt;&#xA;&lt;li&gt;项目2&lt;/li&gt;&#xA;&lt;li&gt;项目3&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;这是一个有序列表：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;第一步&lt;/li&gt;&#xA;&lt;li&gt;第二步&lt;/li&gt;&#xA;&lt;li&gt;第三步&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这是一段引用文本，可以用来强调重要内容。&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;访问&lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo官网&lt;/a&gt;了解更多信息！&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;这是一个代码块&#xD;&#xA;func main() {&#xD;&#xA;    fmt.Println(&amp;#34;Hello, Hugo!&amp;#34;)&#xD;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;&#xA;&lt;p&gt;感谢阅读我的第一篇文章！&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>笔记_mcp</title>
+      <link>https://yichixing.github.io/hugo_blog_note/blog/0/</link>
+      <pubDate>Sun, 20 Apr 2025 11:45:26 +0800</pubDate>
+      <guid>https://yichixing.github.io/hugo_blog_note/blog/0/</guid>
+      <description>&lt;p&gt;好的，这是视频内容的章节划分：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;00:00 - 01:27 核心问题与MCP基础回顾&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;提出关于MCP Server配置、工具调用、Client/Server交互、模型支持差异等核心疑问。&lt;/li&gt;&#xA;&lt;li&gt;引出本期内容目标：带大家弄懂MCP的核心原理。&lt;/li&gt;&#xA;&lt;li&gt;回顾上一期MCP+数据库教程的核心内容。&lt;/li&gt;&#xA;&lt;li&gt;介绍本期视频内容大纲。&lt;/li&gt;&#xA;&lt;li&gt;回顾MCP（Model Context Protocol）的基本概念、目标和工作方式（MCP Host, Client, Server）。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;01:27 - 09:09 MCP Server 配置深度解析&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;讲解MCP Server配置文件的结构。&lt;/li&gt;&#xA;&lt;li&gt;详细解析通信协议类型：STDIO（标准输入输出）和 SSE（服务器推送事件）的区别和使用场景。&lt;/li&gt;&#xA;&lt;li&gt;解释配置中的“命令”和“参数”字段，特别是&lt;code&gt;npx&lt;/code&gt;和&lt;code&gt;uvx&lt;/code&gt;的用法，以及如何拼接成可执行命令。&lt;/li&gt;&#xA;&lt;li&gt;讲解数据传输格式：JSON-RPC 2.0。&lt;/li&gt;&#xA;&lt;li&gt;讨论Windows环境下MCP Server配置的注意事项和常见问题（命令解释器差异）。&lt;/li&gt;&#xA;&lt;li&gt;总结分析MCP Server配置，理解其如何实现统一的工具调用方式。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;09:09 - 13:37 MCP Server 开发与调试&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;演示如何基于LLM（大型语言模型）构建MCP Server，利用AI辅助生成代码。&lt;/li&gt;&#xA;&lt;li&gt;介绍并使用官方&lt;code&gt;inspector&lt;/code&gt;工具调试刚刚开发好的MCP Server，查看工具列表和交互请求/响应。&lt;/li&gt;&#xA;&lt;li&gt;演示如何在 Cline (类似VS Code的编辑器) 中测试配置好的MCP Server。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;13:37 - 21:29 MCP Client 与 Server 通信原理分析&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;引出疑问：MCP Client如何知道Server提供了哪些工具？模型如何选择工具？&lt;/li&gt;&#xA;&lt;li&gt;配置并使用抓包工具（Charles）分析MCP通信过程。&lt;/li&gt;&#xA;&lt;li&gt;抓包分析 Cherry Studio 与 MCP Server 的交互过程，发现其使用了 Function Call 机制。&lt;/li&gt;&#xA;&lt;li&gt;抓包分析 Cline 与 MCP Server 的交互过程，发现其使用了系统提示词（System Prompt）机制来传递工具列表。&lt;/li&gt;&#xA;&lt;li&gt;总结对比 Cherry Studio 和 Cline 的MCP核心流程，解释为何 Cline 能支持所有模型而 Cherry Studio 只能支持部分。&lt;/li&gt;&#xA;&lt;li&gt;展示MCP交互流程时序图，总结整个交互过程。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;21:29 - 27:41 使用 mcp-client-nodejs 分析 MCP 交互流程&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

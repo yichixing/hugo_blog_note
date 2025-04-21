@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>笔记_mcp | 我的博客</title>
+<meta name="title" content="笔记_mcp" />
+<meta name="description" content="好的，这是视频内容的章节划分：
+
+
+00:00 - 01:27 核心问题与MCP基础回顾
+
+提出关于MCP Server配置、工具调用、Client/Server交互、模型支持差异等核心疑问。
+引出本期内容目标：带大家弄懂MCP的核心原理。
+回顾上一期MCP&#43;数据库教程的核心内容。
+介绍本期视频内容大纲。
+回顾MCP（Model Context Protocol）的基本概念、目标和工作方式（MCP Host, Client, Server）。
+
+
+
+01:27 - 09:09 MCP Server 配置深度解析
+
+讲解MCP Server配置文件的结构。
+详细解析通信协议类型：STDIO（标准输入输出）和 SSE（服务器推送事件）的区别和使用场景。
+解释配置中的“命令”和“参数”字段，特别是npx和uvx的用法，以及如何拼接成可执行命令。
+讲解数据传输格式：JSON-RPC 2.0。
+讨论Windows环境下MCP Server配置的注意事项和常见问题（命令解释器差异）。
+总结分析MCP Server配置，理解其如何实现统一的工具调用方式。
+
+
+
+09:09 - 13:37 MCP Server 开发与调试
+
+演示如何基于LLM（大型语言模型）构建MCP Server，利用AI辅助生成代码。
+介绍并使用官方inspector工具调试刚刚开发好的MCP Server，查看工具列表和交互请求/响应。
+演示如何在 Cline (类似VS Code的编辑器) 中测试配置好的MCP Server。
+
+
+
+13:37 - 21:29 MCP Client 与 Server 通信原理分析
+
+引出疑问：MCP Client如何知道Server提供了哪些工具？模型如何选择工具？
+配置并使用抓包工具（Charles）分析MCP通信过程。
+抓包分析 Cherry Studio 与 MCP Server 的交互过程，发现其使用了 Function Call 机制。
+抓包分析 Cline 与 MCP Server 的交互过程，发现其使用了系统提示词（System Prompt）机制来传递工具列表。
+总结对比 Cherry Studio 和 Cline 的MCP核心流程，解释为何 Cline 能支持所有模型而 Cherry Studio 只能支持部分。
+展示MCP交互流程时序图，总结整个交互过程。
+
+
+
+21:29 - 27:41 使用 mcp-client-nodejs 分析 MCP 交互流程" />
+<meta name="keywords" content="" />
+
+
+<meta property="og:url" content="https://yichixing.github.io/hugo_blog_note/blog/0/">
+  <meta property="og:site_name" content="我的博客">
+  <meta property="og:title" content="笔记_mcp">
+  <meta property="og:description" content="好的，这是视频内容的章节划分：
+00:00 - 01:27 核心问题与MCP基础回顾
+提出关于MCP Server配置、工具调用、Client/Server交互、模型支持差异等核心疑问。 引出本期内容目标：带大家弄懂MCP的核心原理。 回顾上一期MCP&#43;数据库教程的核心内容。 介绍本期视频内容大纲。 回顾MCP（Model Context Protocol）的基本概念、目标和工作方式（MCP Host, Client, Server）。 01:27 - 09:09 MCP Server 配置深度解析
+讲解MCP Server配置文件的结构。 详细解析通信协议类型：STDIO（标准输入输出）和 SSE（服务器推送事件）的区别和使用场景。 解释配置中的“命令”和“参数”字段，特别是npx和uvx的用法，以及如何拼接成可执行命令。 讲解数据传输格式：JSON-RPC 2.0。 讨论Windows环境下MCP Server配置的注意事项和常见问题（命令解释器差异）。 总结分析MCP Server配置，理解其如何实现统一的工具调用方式。 09:09 - 13:37 MCP Server 开发与调试
+演示如何基于LLM（大型语言模型）构建MCP Server，利用AI辅助生成代码。 介绍并使用官方inspector工具调试刚刚开发好的MCP Server，查看工具列表和交互请求/响应。 演示如何在 Cline (类似VS Code的编辑器) 中测试配置好的MCP Server。 13:37 - 21:29 MCP Client 与 Server 通信原理分析
+引出疑问：MCP Client如何知道Server提供了哪些工具？模型如何选择工具？ 配置并使用抓包工具（Charles）分析MCP通信过程。 抓包分析 Cherry Studio 与 MCP Server 的交互过程，发现其使用了 Function Call 机制。 抓包分析 Cline 与 MCP Server 的交互过程，发现其使用了系统提示词（System Prompt）机制来传递工具列表。 总结对比 Cherry Studio 和 Cline 的MCP核心流程，解释为何 Cline 能支持所有模型而 Cherry Studio 只能支持部分。 展示MCP交互流程时序图，总结整个交互过程。 21:29 - 27:41 使用 mcp-client-nodejs 分析 MCP 交互流程">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2025-04-20T11:45:26+08:00">
+    <meta property="article:modified_time" content="2025-04-20T11:45:26+08:00">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="笔记_mcp">
+  <meta name="twitter:description" content="好的，这是视频内容的章节划分：
+00:00 - 01:27 核心问题与MCP基础回顾
+提出关于MCP Server配置、工具调用、Client/Server交互、模型支持差异等核心疑问。 引出本期内容目标：带大家弄懂MCP的核心原理。 回顾上一期MCP&#43;数据库教程的核心内容。 介绍本期视频内容大纲。 回顾MCP（Model Context Protocol）的基本概念、目标和工作方式（MCP Host, Client, Server）。 01:27 - 09:09 MCP Server 配置深度解析
+讲解MCP Server配置文件的结构。 详细解析通信协议类型：STDIO（标准输入输出）和 SSE（服务器推送事件）的区别和使用场景。 解释配置中的“命令”和“参数”字段，特别是npx和uvx的用法，以及如何拼接成可执行命令。 讲解数据传输格式：JSON-RPC 2.0。 讨论Windows环境下MCP Server配置的注意事项和常见问题（命令解释器差异）。 总结分析MCP Server配置，理解其如何实现统一的工具调用方式。 09:09 - 13:37 MCP Server 开发与调试
+演示如何基于LLM（大型语言模型）构建MCP Server，利用AI辅助生成代码。 介绍并使用官方inspector工具调试刚刚开发好的MCP Server，查看工具列表和交互请求/响应。 演示如何在 Cline (类似VS Code的编辑器) 中测试配置好的MCP Server。 13:37 - 21:29 MCP Client 与 Server 通信原理分析
+引出疑问：MCP Client如何知道Server提供了哪些工具？模型如何选择工具？ 配置并使用抓包工具（Charles）分析MCP通信过程。 抓包分析 Cherry Studio 与 MCP Server 的交互过程，发现其使用了 Function Call 机制。 抓包分析 Cline 与 MCP Server 的交互过程，发现其使用了系统提示词（System Prompt）机制来传递工具列表。 总结对比 Cherry Studio 和 Cline 的MCP核心流程，解释为何 Cline 能支持所有模型而 Cherry Studio 只能支持部分。 展示MCP交互流程时序图，总结整个交互过程。 21:29 - 27:41 使用 mcp-client-nodejs 分析 MCP 交互流程">
+
+
+
+
+  <meta itemprop="name" content="笔记_mcp">
+  <meta itemprop="description" content="好的，这是视频内容的章节划分：
+00:00 - 01:27 核心问题与MCP基础回顾
+提出关于MCP Server配置、工具调用、Client/Server交互、模型支持差异等核心疑问。 引出本期内容目标：带大家弄懂MCP的核心原理。 回顾上一期MCP&#43;数据库教程的核心内容。 介绍本期视频内容大纲。 回顾MCP（Model Context Protocol）的基本概念、目标和工作方式（MCP Host, Client, Server）。 01:27 - 09:09 MCP Server 配置深度解析
+讲解MCP Server配置文件的结构。 详细解析通信协议类型：STDIO（标准输入输出）和 SSE（服务器推送事件）的区别和使用场景。 解释配置中的“命令”和“参数”字段，特别是npx和uvx的用法，以及如何拼接成可执行命令。 讲解数据传输格式：JSON-RPC 2.0。 讨论Windows环境下MCP Server配置的注意事项和常见问题（命令解释器差异）。 总结分析MCP Server配置，理解其如何实现统一的工具调用方式。 09:09 - 13:37 MCP Server 开发与调试
+演示如何基于LLM（大型语言模型）构建MCP Server，利用AI辅助生成代码。 介绍并使用官方inspector工具调试刚刚开发好的MCP Server，查看工具列表和交互请求/响应。 演示如何在 Cline (类似VS Code的编辑器) 中测试配置好的MCP Server。 13:37 - 21:29 MCP Client 与 Server 通信原理分析
+引出疑问：MCP Client如何知道Server提供了哪些工具？模型如何选择工具？ 配置并使用抓包工具（Charles）分析MCP通信过程。 抓包分析 Cherry Studio 与 MCP Server 的交互过程，发现其使用了 Function Call 机制。 抓包分析 Cline 与 MCP Server 的交互过程，发现其使用了系统提示词（System Prompt）机制来传递工具列表。 总结对比 Cherry Studio 和 Cline 的MCP核心流程，解释为何 Cline 能支持所有模型而 Cherry Studio 只能支持部分。 展示MCP交互流程时序图，总结整个交互过程。 21:29 - 27:41 使用 mcp-client-nodejs 分析 MCP 交互流程">
+  <meta itemprop="datePublished" content="2025-04-20T11:45:26+08:00">
+  <meta itemprop="dateModified" content="2025-04-20T11:45:26+08:00">
+  <meta itemprop="wordCount" content="134">
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
+  <style>
+  :root {
+      --width: 720px;
+      --font-main: Verdana, sans-serif;
+      --font-secondary: Verdana, sans-serif;
+      --font-scale: 1em;
+      --background-color: #fff;
+      --heading-color: #222;
+      --text-color: #444;
+      --link-color: #3273dc;
+      --visited-color:  #8b6fcb;
+      --code-background-color: #f2f2f2;
+      --code-color: #222;
+      --blockquote-color: #222;
+  }
+
+  @media (prefers-color-scheme: dark) {
+      :root {
+          --background-color: #01242e;
+          --heading-color: #eee;
+          --text-color: #ddd;
+          --link-color: #8cc2dd;
+          --visited-color:  #8b6fcb;
+          --code-background-color: #000;
+          --code-color: #ddd;
+          --blockquote-color: #ccc;
+      }
+  }
+
+  body {
+      font-family: var(--font-secondary);
+      font-size: var(--font-scale);
+      margin: auto;
+      padding: 20px;
+      max-width: var(--width);
+      text-align: left;
+      background-color: var(--background-color);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      line-height: 1.5;
+      color: var(--text-color);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-main);
+      color: var(--heading-color);
+  }
+
+  a {
+      color: var(--link-color);
+      cursor: pointer;
+      text-decoration: none;
+  }
+
+  a:hover {
+      text-decoration: underline;
+  }
+
+  nav a {
+      margin-right: 8px;
+  }
+
+  strong, b {
+      color: var(--heading-color);
+  }
+
+  button {
+      margin: 0;
+      cursor: pointer;
+  }
+
+  time {
+   	font-family: monospace;
+    	font-style: normal;
+    	font-size: 15px;
+  }
+
+  main {
+      line-height: 1.6;
+  }
+
+  table {
+      width: 100%;
+  }
+
+  hr {
+      border: 0;
+      border-top: 1px dashed;
+  }
+
+  img {
+      max-width: 100%;
+  }
+
+  code {
+      font-family: monospace;
+      padding: 2px;
+      background-color: var(--code-background-color);
+      color: var(--code-color);
+      border-radius: 3px;
+  }
+
+  blockquote {
+      border-left: 1px solid #999;
+      color: var(--code-color);
+      padding-left: 20px;
+      font-style: italic;
+  }
+
+  footer {
+      padding: 25px 0;
+      text-align: center;
+  }
+
+  .title:hover {
+      text-decoration: none;
+  }
+
+  .title h1 {
+      font-size: 1.5em;
+  }
+
+  .inline {
+      width: auto !important;
+  }
+
+  .highlight, .code {
+      padding: 1px 15px;
+      background-color: var(--code-background-color);
+      color: var(--code-color);
+      border-radius: 3px;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      overflow-x: auto;
+  }
+
+   
+  ul.blog-posts {
+      list-style-type: none;
+      padding: unset;
+  }
+
+  ul.blog-posts li {
+      display: flex;
+  }
+
+  ul.blog-posts li span {
+      flex: 0 0 130px;
+  }
+
+  ul.blog-posts li a:visited {
+      color: var(--visited-color);
+  }
+</style>
+
+</head>
+
+<body>
+  <header><a href="/hugo_blog_note/" class="title">
+  <h2>我的博客</h2>
+</a>
+<nav><a href="/hugo_blog_note/">Home</a>
+
+
+<a href="/hugo_blog_note/blog">Blog</a>
+
+
+<a href="/hugo_blog_note/test">test</a>
+
+</nav>
+</header>
+  <main>
+
+<h1>笔记_mcp</h1>
+<p>
+  <i>
+    <time datetime='2025-04-20'>
+      2025-04-20
+    </time>
+  </i>
+</p>
+
+<content>
+  <p>好的，这是视频内容的章节划分：</p>
+<ol>
+<li>
+<p><strong>00:00 - 01:27 核心问题与MCP基础回顾</strong></p>
+<ul>
+<li>提出关于MCP Server配置、工具调用、Client/Server交互、模型支持差异等核心疑问。</li>
+<li>引出本期内容目标：带大家弄懂MCP的核心原理。</li>
+<li>回顾上一期MCP+数据库教程的核心内容。</li>
+<li>介绍本期视频内容大纲。</li>
+<li>回顾MCP（Model Context Protocol）的基本概念、目标和工作方式（MCP Host, Client, Server）。</li>
+</ul>
+</li>
+<li>
+<p><strong>01:27 - 09:09 MCP Server 配置深度解析</strong></p>
+<ul>
+<li>讲解MCP Server配置文件的结构。</li>
+<li>详细解析通信协议类型：STDIO（标准输入输出）和 SSE（服务器推送事件）的区别和使用场景。</li>
+<li>解释配置中的“命令”和“参数”字段，特别是<code>npx</code>和<code>uvx</code>的用法，以及如何拼接成可执行命令。</li>
+<li>讲解数据传输格式：JSON-RPC 2.0。</li>
+<li>讨论Windows环境下MCP Server配置的注意事项和常见问题（命令解释器差异）。</li>
+<li>总结分析MCP Server配置，理解其如何实现统一的工具调用方式。</li>
+</ul>
+</li>
+<li>
+<p><strong>09:09 - 13:37 MCP Server 开发与调试</strong></p>
+<ul>
+<li>演示如何基于LLM（大型语言模型）构建MCP Server，利用AI辅助生成代码。</li>
+<li>介绍并使用官方<code>inspector</code>工具调试刚刚开发好的MCP Server，查看工具列表和交互请求/响应。</li>
+<li>演示如何在 Cline (类似VS Code的编辑器) 中测试配置好的MCP Server。</li>
+</ul>
+</li>
+<li>
+<p><strong>13:37 - 21:29 MCP Client 与 Server 通信原理分析</strong></p>
+<ul>
+<li>引出疑问：MCP Client如何知道Server提供了哪些工具？模型如何选择工具？</li>
+<li>配置并使用抓包工具（Charles）分析MCP通信过程。</li>
+<li>抓包分析 Cherry Studio 与 MCP Server 的交互过程，发现其使用了 Function Call 机制。</li>
+<li>抓包分析 Cline 与 MCP Server 的交互过程，发现其使用了系统提示词（System Prompt）机制来传递工具列表。</li>
+<li>总结对比 Cherry Studio 和 Cline 的MCP核心流程，解释为何 Cline 能支持所有模型而 Cherry Studio 只能支持部分。</li>
+<li>展示MCP交互流程时序图，总结整个交互过程。</li>
+</ul>
+</li>
+<li>
+<p><strong>21:29 - 27:41 使用 mcp-client-nodejs 分析 MCP 交互流程</strong></p>
+<ul>
+<li>介绍基于LLM构建的Node.js版MCP Client项目 (mcp-client-nodejs)。</li>
+<li>讲解该项目的核心特性、安装配置和使用方法。</li>
+<li>通过运行该Client并查看日志，详细分析MCP Client与LLM、MCP Server之间的完整交互流程（获取工具列表 -&gt; LLM请求 -&gt; 模型响应 -&gt; 调用工具 -&gt; 工具响应 -&gt; 最终LLM响应）。</li>
+</ul>
+</li>
+<li>
+<p><strong>27:41 - 29:38 最终流程总结</strong></p>
+<ul>
+<li>结合时序图，再次梳理并总结MCP Client、MCP Server、LLM、本地环境（工具执行）之间的完整交互流程。</li>
+</ul>
+</li>
+<li>
+<p><strong>29:38 - 30:15 总结与下期预告</strong></p>
+<ul>
+<li>对本期内容进行总结。</li>
+<li>提供获取课件和资料的方式。</li>
+<li>预告下期内容：使用 easy dataset 加 Llama factory 一站式完成本地模型微调全流程。</li>
+</ul>
+</li>
+</ol>
+
+</content>
+<p>
+  
+</p>
+
+  </main>
+  <footer>Made with <a href="https://github.com/janraasch/hugo-bearblog/">Hugo ʕ•ᴥ•ʔ Bear</a>
+</footer>
+
+    
+</body>
+
+</html>

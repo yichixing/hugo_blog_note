@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://yichixing.github.io/hugo_blog_note/test/</loc>
+    <lastmod>2025-04-20T12:13:28+08:00</lastmod>
+  </url><url>
+    <loc>https://yichixing.github.io/hugo_blog_note/</loc>
+    <lastmod>2025-04-20T12:13:28+08:00</lastmod>
+  </url><url>
+    <loc>https://yichixing.github.io/hugo_blog_note/test/%E6%B5%8B%E8%AF%95/</loc>
+    <lastmod>2025-04-20T12:13:28+08:00</lastmod>
+  </url><url>
+    <loc>https://yichixing.github.io/hugo_blog_note/blog/</loc>
+    <lastmod>2025-04-20T11:45:26+08:00</lastmod>
+  </url><url>
+    <loc>https://yichixing.github.io/hugo_blog_note/blog/my-new-post/</loc>
+    <lastmod>2025-04-20T11:45:26+08:00</lastmod>
+  </url><url>
+    <loc>https://yichixing.github.io/hugo_blog_note/blog/0/</loc>
+    <lastmod>2025-04-20T11:45:26+08:00</lastmod>
+  </url><url>
+    <loc>https://yichixing.github.io/hugo_blog_note/test/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</loc>
+    <lastmod>2025-04-20T11:45:26+08:00</lastmod>
+  </url><url>
+    <loc>https://yichixing.github.io/hugo_blog_note/test/first-post/</loc>
+    <lastmod>2025-04-20T11:19:37+08:00</lastmod>
+  </url><url>
+    <loc>https://yichixing.github.io/hugo_blog_note/posts/</loc>
+  </url>
+</urlset>
